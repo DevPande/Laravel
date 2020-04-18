@@ -38,8 +38,9 @@ class PostController extends Controller
     {
         $this->validate($request,[
             'name'=>'required',
-            'email'=>'required|email|unique:posts,email',
-            'pincode'=>'required|min:6|max:6'
+            'pincode'=>'required|min:6|max:6',
+            'email'=>'required|email|unique:posts,email,NULL,id,pincode,'.$request->pincode
+
         ]);
         $post = new Post;
         $post->name=$request->input('name');
